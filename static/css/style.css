@@ -1,0 +1,22 @@
+body{
+    background:#f5f6f8;
+}
+
+.sidebar{
+    background:white;
+    min-height:100vh;
+    border-right:1px solid #ddd;
+    padding:20px;
+}
+
+.sidebar a{
+    display:block;
+    text-decoration:none;
+    padding:12px;
+    color:#0d6efd;
+}
+
+.sidebar a:hover{
+    background:#f0f4ff;
+    border-radius:8px;
+}
