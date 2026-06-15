@@ -20,3 +20,13 @@ body{
     background:#f0f4ff;
     border-radius:8px;
 }
+
+#calendar {
+    width: 100%;
+    min-height: 700px;
+    
+}
+
+.fc {
+    width: 100%;
+}

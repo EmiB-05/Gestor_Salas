@@ -4,14 +4,110 @@
 
 <h1>Horario semanal de salas</h1>
 
-<div class="card">
-
-    <div class="card-body">
-
-        Aquí irá FullCalendar
-
+<div class="row">
+    <div class="col-lg-8">
+        <div id="calendar"></div>
+       
     </div>
 
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">Detalles</div>
+            <div class="card-body" id="detalle-reserva">
+                Selecciona una reserva
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<!-- FullCalendar CSS -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.css" rel="stylesheet">
+
+
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    const calendarEl = document.getElementById('calendar');
+
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+
+        initialView: 'timeGridWeek',
+
+        locale: 'es',
+
+        allDaySlot: false,
+
+        slotMinTime: '07:00:00',
+        slotMaxTime: '21:00:00',
+
+        selectable: true,
+
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'timeGridWeek,timeGridDay'
+        },
+
+        // Eventos de ejemplo
+        events: [
+            {
+                title: 'Sala 1',
+                start: '2026-06-15T09:00:00',
+                end: '2026-06-15T11:00:00'
+            },
+            {
+                title: 'Sala 2',
+                start: '2026-06-16T14:00:00',
+                end: '2026-06-16T16:00:00'
+            }
+        ],
+
+        // Click en una celda libre
+        dateClick: function(info) {
+
+            document.getElementById("detalle-reserva").innerHTML = `
+                <h5>Nueva reserva</h5>
+
+                <p>
+                    <strong>Fecha:</strong><br>
+                    ${info.date.toLocaleString()}
+                </p>
+
+                <button
+                    class="btn btn-primary"
+                    onclick="reservar('${info.dateStr}')">
+                    Reservar
+                </button>
+            `;
+        },
+
+        // Click en una reserva existente
+        eventClick: function(info) {
+
+            document.getElementById("detalle-reserva").innerHTML = `
+                <h5>${info.event.title}</h5>
+
+                <p>
+                    <strong>Inicio:</strong><br>
+                    ${info.event.start.toLocaleString()}
+                </p>
+
+                <p>
+                    <strong>Fin:</strong><br>
+                    ${info.event.end.toLocaleString()}
+                </p>
+            `;
+        }
+
+    });
+
+    calendar.render();
+
+});
+</script>
 
 {% endblock %}
