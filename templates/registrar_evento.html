@@ -1,0 +1,331 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+<div>
+
+    <h2 class="mb-0">
+        Detalles del Evento
+    </h2>
+
+    <small class="text-muted">
+        Configurar los requisitos de espacio y la programación del evento.
+    </small>
+
+</div>
+
+<div class="d-flex gap-2">
+
+    <a href="/" class="btn btn-outline-secondary">
+        Cancelar
+    </a>
+
+    <button
+        type="submit"
+        class="btn btn-primary">
+
+        Confirmar Evento
+
+    </button>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<!-- Columna izquierda -->
+
+<div class="col-lg-8">
+
+    <!-- Información General -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header">
+            Información General
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Responsable
+                    </label>
+
+                    <input
+                        type="text"
+                        name="responsable"
+                        class="form-control"
+                        placeholder="Nombre del responsable"
+                        value="{{ responsable if responsable is defined else '' }}"
+                        required>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Nombre del evento
+                    </label>
+
+                    <input
+                        type="text"
+                        name="nombre_evento"
+                        class="form-control"
+                        placeholder="Nombre del evento"
+                        value="{{ nombre_evento if nombre_evento is defined else '' }}"
+                        required>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Asistentes
+                    </label>
+
+                    <input
+                        type="number"
+                        name="asistentes"
+                        class="form-control"
+                        min="1"
+                        placeholder="Cantidad de asistentes"
+                        value="{{ asistentes if asistentes is defined else '' }}">
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Tipo de acomodo
+                    </label>
+
+                    <select
+                        name="tipo_acomodo"
+                        class="form-select">
+
+                        <option
+                            value="Aula"
+                            {% if tipo_acomodo is defined and tipo_acomodo == "Aula" %}
+                            selected
+                            {% endif %}>
+                            Aula
+                        </option>
+
+                        <option
+                            value="Auditorio"
+                            {% if tipo_acomodo is defined and tipo_acomodo == "Auditorio" %}
+                            selected
+                            {% endif %}>
+                            Auditorio
+                        </option>
+
+                        <option
+                            value="Mesa redonda"
+                            {% if tipo_acomodo is defined and tipo_acomodo == "Mesa redonda" %}
+                            selected
+                            {% endif %}>
+                            Mesa redonda
+                        </option>
+
+                        <option
+                            value="Conferencia"
+                            {% if tipo_acomodo is defined and tipo_acomodo == "Conferencia" %}
+                            selected
+                            {% endif %}>
+                            Conferencia
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Fecha y horario -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header">
+            Fecha y horario
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Fecha
+                    </label>
+
+                    <input
+                        type="date"
+                        name="fecha"
+                        class="form-control"
+                        value="{{ fecha if fecha is defined else '' }}">
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Hora inicio
+                    </label>
+
+                    <input
+                        type="time"
+                        name="hora_inicio"
+                        class="form-control"
+                        value="{{ hora_inicio if hora_inicio is defined else '' }}">
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Hora fin
+                    </label>
+
+                    <input
+                        type="time"
+                        name="hora_fin"
+                        class="form-control"
+                        value="{{ hora_fin if hora_fin is defined else '' }}">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Columna derecha -->
+
+<div class="col-lg-4">
+
+    <!-- Extras -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header">
+            Extras
+        </div>
+
+        <div class="card-body">
+
+            <div class="form-check mb-2">
+
+                <input
+                    type="checkbox"
+                    class="form-check-input"
+                    name="extension"
+                    {% if extension is defined and extension %}
+                    checked
+                    {% endif %}>
+
+                <label class="form-check-label">
+                    Extensiones
+                </label>
+
+            </div>
+
+            <div class="form-check mb-2">
+
+                <input
+                    type="checkbox"
+                    class="form-check-input"
+                    name="cafeteria"
+                    {% if cafeteria is defined and cafeteria %}
+                    checked
+                    {% endif %}>
+
+                <label class="form-check-label">
+                    Cafetería
+                </label>
+
+            </div>
+
+            <div class="form-check mb-2">
+
+                <input
+                    type="checkbox"
+                    class="form-check-input"
+                    name="sonido"
+                    {% if sonido is defined and sonido %}
+                    checked
+                    {% endif %}>
+
+                <label class="form-check-label">
+                    Sonido
+                </label>
+
+            </div>
+
+            <div class="form-check">
+
+                <input
+                    type="checkbox"
+                    class="form-check-input"
+                    name="videoconferencia"
+                    {% if videoconferencia is defined and videoconferencia %}
+                    checked
+                    {% endif %}>
+
+                <label class="form-check-label">
+                    Videoconferencia
+                </label>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Política -->
+
+    <div class="card border-warning shadow-sm">
+
+        <div class="card-body">
+
+            <h6 class="text-warning">
+                Política del Sistema
+            </h6>
+
+            <small class="text-muted">
+
+                Los eventos no se pueden eliminar.
+
+                <br><br>
+
+                Verifique cuidadosamente los datos antes de confirmar la reserva.
+
+            </small>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</form>
+
+{% endblock %}

@@ -14,7 +14,7 @@ def inicio():
 
 @eventos_bp.route("/registrar")
 def registrar():
-    return render_template("registrar.html")
+    return render_template("registrar_evento.html")
 
 @eventos_bp.route("/estadisticas")
 def estadisticas():

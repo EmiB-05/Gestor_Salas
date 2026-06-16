@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Header -->
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+<div>
+
+    <h2 class="mb-0">
+        Registro de eventos
+    </h2>
+
+    <small class="text-muted">
+        Modificaciones de eventos en todo el sistema y registros históricos.
+    </small>
+
+</div>
+
+<div class="d-flex gap-2">
+
+    <button class="btn btn-outline-secondary">
+        Exportar CSV
+    </button>
+
+    <button class="btn btn-primary">
+        Imprimir Reporte
+    </button>
+
+</div>
+
+</div>
+
+<!-- Tabla -->
+
+<div class="card shadow-sm mb-4">
+
+<div class="card-body p-0">
+
+    <table class="table table-hover mb-0">
+
+        <thead class="table-light">
+
+            <tr>
+
+                <th>Fecha y Hora</th>
+
+                <th>Sala</th>
+
+                <th>Nombre del Evento</th>
+
+                <th>Estado</th>
+
+                <th>Acciones</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% if registros %}
+
+                {% for registro in registros %}
+
+                <tr>
+
+                    <td>
+
+                        {{ registro.fecha }}
+
+                        {% if registro.hora %}
+                        <br>
+                        <small class="text-muted">
+                            {{ registro.hora }}
+                        </small>
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        {{ registro.sala }}
+                    </td>
+
+                    <td>
+                        {{ registro.evento }}
+                    </td>
+
+                    <td>
+
+                        {% if registro.estado|lower == "modificado" %}
+
+                            <span class="badge bg-warning text-dark">
+                                {{ registro.estado }}
+                            </span>
+
+                        {% elif registro.estado|lower == "original" %}
+
+                            <span class="badge bg-info text-dark">
+                                {{ registro.estado }}
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-secondary">
+                                {{ registro.estado }}
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {% if registro.id %}
+
+                            <a href="/historial/{{ registro.id }}">
+                                Ver Cambios
+                            </a>
+
+                        {% else %}
+
+                            <a href="#">
+                                Ver Cambios
+                            </a>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            {% else %}
+
+                <tr>
+
+                    <td colspan="5" class="text-center py-4 text-muted">
+
+                        No hay registros históricos disponibles.
+
+                    </td>
+
+                </tr>
+
+            {% endif %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</div>
+
+<!-- Estadísticas -->
+
+<div class="row">
+
+<div class="col-md-4">
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <h6 class="text-muted">
+                CAMBIO DE FRECUENCIA
+            </h6>
+
+            <h2>
+                 {{ frecuencia_cambio if frecuencia_cambio is defined else "14.2%" }}
+            </h2>
+
+            <small class="text-muted">
+                Aumento en las reasignaciones respecto al mes anterior.
+            </small>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="col-md-4">
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <h6 class="text-muted">
+                CUMPLIMIENTO DE EVENTOS
+            </h6>
+
+            <h2>
+                {{ cumplimiento if cumplimiento is defined else "100%" }}
+            </h2>
+
+            <small class="text-muted">
+                Todas las acciones administrativas están indexadas.
+            </small>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="col-md-4">
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <h6 class="text-muted">
+                OPTIMIZACIÓN
+            </h6>
+
+            <h2>
+                {{ optimizacion if optimizacion is defined else "248" }}
+            </h2>
+
+            <small class="text-muted">
+                Conflictos históricos resueltos automáticamente.
+            </small>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+{% endblock %}
+</div>
