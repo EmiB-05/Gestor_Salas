@@ -21,3 +21,10 @@ class Evento(db.Model):
     tipo_acomodo = db.Column(db.String(50))
 
     estado = db.Column(db.String(20))
+
+    sala_id = db.Column(
+        db.Integer,
+        db.ForeignKey("salas.id")
+    )
+
+    sala = db.relationship("Sala")

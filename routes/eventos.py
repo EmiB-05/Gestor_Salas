@@ -1,5 +1,7 @@
-from flask import Blueprint
+from flask import Blueprint, url_for
 from flask import render_template
+
+from modelos.evento import Evento
 
 eventos_bp = Blueprint(
     "eventos",

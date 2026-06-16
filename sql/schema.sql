@@ -24,6 +24,19 @@ CREATE TABLE eventos (
     estado VARCHAR(20) DEFAULT 'Activo'
 );
 
+CREATE TABLE evento_salas (
+    evento_id INT,
+    sala_id INT,
+
+    PRIMARY KEY(evento_id, sala_id),
+
+    FOREIGN KEY(evento_id)
+        REFERENCES eventos(id),
+
+    FOREIGN KEY(sala_id)
+        REFERENCES salas(id)
+);
+
 CREATE TABLE servicios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100)
