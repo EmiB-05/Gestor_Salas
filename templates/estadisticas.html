@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Estadísticas</h2>
+
+<div class="row mb-4">
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <h6>Total Eventos</h6>
+                <h2>{{ total_eventos }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <h6>Salas Utilizadas</h6>
+                <h2>{{ total_salas }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <h6>Promedio Asistentes</h6>
+                <h2>{{ promedio_asistentes }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <h6>Cancelados</h6>
+                <h2>{{ cancelados }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-lg-6">
+
+        <div class="card shadow-sm">
+            <div class="card-header">
+                Eventos por Sala
+            </div>
+
+            <div class="card-body">
+                <canvas id="salasChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-6">
+
+        <div class="card shadow-sm">
+            <div class="card-header">
+                Estado de Eventos
+            </div>
+
+            <div class="card-body">
+                <canvas id="estadoChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row mt-4">
+
+    <div class="col-12">
+
+        <div class="card shadow-sm">
+
+            <div class="card-header">
+                Asistentes por Mes
+            </div>
+
+            <div class="card-body">
+
+                <canvas id="asistentesChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+// Eventos por sala
+
+new Chart(
+    document.getElementById('salasChart'),
+    {
+        type: 'bar',
+        data: {
+            labels: ['Sala A', 'Sala B', 'Sala C'],
+            datasets: [{
+                label: 'Eventos',
+                data: [15, 10, 8]
+            }]
+        }
+    }
+);
+
+// Estado eventos
+
+new Chart(
+    document.getElementById('estadoChart'),
+    {
+        type: 'pie',
+        data: {
+            labels: ['Activo', 'Modificado', 'Cancelado'],
+            datasets: [{
+                data: [20, 4, 2]
+            }]
+        }
+    }
+);
+
+// Asistentes por mes
+
+new Chart(
+    document.getElementById('asistentesChart'),
+    {
+        type: 'line',
+        data: {
+            labels: [
+                'Ene',
+                'Feb',
+                'Mar',
+                'Abr',
+                'May',
+                'Jun'
+            ],
+            datasets: [{
+                label: 'Asistentes',
+                data: [120, 180, 150, 220, 250, 300]
+            }]
+        }
+    }
+);
+
+</script>
+
+{% endblock %}

@@ -4,6 +4,8 @@ from database.db import db
 import os
 from routes.calendario import calendar_bp
 from routes.eventos import eventos_bp
+from routes.estadisticas import estadisticas_bp
+from routes.historial import historial_bp
 from modelos.evento import Evento
 from modelos.sala import Sala
 
@@ -12,6 +14,10 @@ app = Flask(__name__)
 app.config.from_object(Config)
 app.register_blueprint(calendar_bp)
 app.register_blueprint(eventos_bp)
+app.register_blueprint(estadisticas_bp)
+app.register_blueprint(historial_bp)
+
+print(app.url_map)
 
 db.init_app(app)
 
