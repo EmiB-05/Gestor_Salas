@@ -166,15 +166,15 @@
         <div class="card-body">
 
             <h6 class="text-muted">
-                CAMBIO DE FRECUENCIA
+                MODIFICACIONES
             </h6>
 
             <h2>
-                 {{ frecuencia_cambio if frecuencia_cambio is defined else "14.2%" }}
+                 {{ frecuencia_cambio if frecuencia_cambio is defined else 0 }}
             </h2>
 
             <small class="text-muted">
-                Aumento en las reasignaciones respecto al mes anterior.
+                Total de modificaciones registradas sobre eventos.
             </small>
 
         </div>
@@ -194,11 +194,11 @@
             </h6>
 
             <h2>
-                {{ cumplimiento if cumplimiento is defined else "100%" }}
+                {{ cumplimiento if cumplimiento is defined else "0%" }}
             </h2>
 
             <small class="text-muted">
-                Todas las acciones administrativas están indexadas.
+                Porcentaje de eventos vigentes (no cancelados).
             </small>
 
         </div>
@@ -214,15 +214,15 @@
         <div class="card-body">
 
             <h6 class="text-muted">
-                OPTIMIZACIÓN
+                MOVIMIENTOS REGISTRADOS
             </h6>
 
             <h2>
-                {{ optimizacion if optimizacion is defined else "248" }}
+                {{ optimizacion if optimizacion is defined else 0 }}
             </h2>
 
             <small class="text-muted">
-                Conflictos históricos resueltos automáticamente.
+                Acciones totales registradas en el historial.
             </small>
 
         </div>
@@ -234,4 +234,3 @@
 </div>
 
 {% endblock %}
-</div>

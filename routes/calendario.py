@@ -23,7 +23,8 @@ def calendario():
             "responsable": evento.responsable,
             "asistentes": evento.asistentes,
             "estado": evento.estado,
-            "tipo_acomodo": evento.tipo_acomodo
+            "tipo_acomodo": evento.tipo_acomodo,
+            "sala": evento.sala.nombre if evento.sala else "Sin asignar"
         })
 
     return render_template(

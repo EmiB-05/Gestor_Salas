@@ -16,7 +16,7 @@
 <div>
 
     <h2 class="mb-0">
-        Detalles del Evento
+        {% if editando %}Editar Evento{% else %}Detalles del Evento{% endif %}
     </h2>
 
     <small class="text-muted">
@@ -35,7 +35,7 @@
         type="submit"
         class="btn btn-primary">
 
-        Confirmar Evento
+        {% if editando %}Actualizar Evento{% else %}Confirmar Evento{% endif %}
 
     </button>
 
@@ -227,7 +227,9 @@
     <select name="sala_id" class="form-select" required>
         <option value="">Selecciona una sala</option>
         {% for sala in salas %}
-        <option value="{{ sala.id }}">
+        <option
+            value="{{ sala.id }}"
+            {% if sala_id is defined and sala_id == sala.id %}selected{% endif %}>
             {{ sala.nombre }} (cap. {{ sala.capacidad }})
         </option>
         {% endfor %}

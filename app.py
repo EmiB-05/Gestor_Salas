@@ -8,6 +8,7 @@ from routes.estadisticas import estadisticas_bp
 from routes.historial import historial_bp
 from modelos.evento import Evento
 from modelos.sala import Sala
+from modelos.historial import Historial
 
 app = Flask(__name__)
 

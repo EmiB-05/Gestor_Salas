@@ -191,6 +191,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const e = info.event;
 
+            const estado = e.extendedProps.estado;
+
+            const badgeClass =
+                estado === "Activo"
+                    ? "bg-success"
+                    : estado === "Modificado"
+                        ? "bg-warning text-dark"
+                        : "bg-danger";
+
+            const cancelado = estado === "Cancelado";
+
             document.getElementById('detalle-reserva').innerHTML = `
 
                 <h5 class="mb-3">
@@ -199,8 +210,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 <div class="mb-2">
 
-                    <span class="badge bg-success">
-                        ${e.extendedProps.estado}
+                    <span class="badge ${badgeClass}">
+                        ${estado}
                     </span>
 
                 </div>
@@ -232,13 +243,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 <div class="d-grid gap-2">
 
-                    <button class="btn btn-outline-primary">
+                    <a href="/editar/${e.id}" class="btn btn-outline-primary">
                         Editar
-                    </button>
+                    </a>
 
-                    <button class="btn btn-outline-danger">
-                        Cancelar
-                    </button>
+                    <form
+                        method="POST"
+                        action="/cancelar/${e.id}"
+                        onsubmit="return confirm('¿Cancelar este evento?');">
+
+                        <button
+                            type="submit"
+                            class="btn btn-outline-danger w-100"
+                            ${cancelado ? "disabled" : ""}>
+                            ${cancelado ? "Cancelado" : "Cancelar"}
+                        </button>
+
+                    </form>
 
                 </div>
 

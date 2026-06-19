@@ -21,7 +21,26 @@ CREATE TABLE eventos (
     hora_inicio TIME,
     hora_fin TIME,
     tipo_acomodo VARCHAR(50),
-    estado VARCHAR(20) DEFAULT 'Activo'
+    estado VARCHAR(20) DEFAULT 'Activo',
+
+    extension BOOLEAN DEFAULT FALSE,
+    cafeteria BOOLEAN DEFAULT FALSE,
+    sonido BOOLEAN DEFAULT FALSE,
+    videoconferencia BOOLEAN DEFAULT FALSE,
+
+    sala_id INT,
+
+    FOREIGN KEY(sala_id) REFERENCES salas(id)
+);
+
+CREATE TABLE historial (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    evento_id INT,
+    accion VARCHAR(20),
+    descripcion VARCHAR(255),
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY(evento_id) REFERENCES eventos(id)
 );
 
 CREATE TABLE evento_salas (

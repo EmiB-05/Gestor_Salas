@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+        <h2 class="mb-0">Detalle del Movimiento</h2>
+        <small class="text-muted">
+            Información del cambio registrado en el historial.
+        </small>
+    </div>
+
+    <a href="/historial" class="btn btn-outline-secondary">
+        Volver al Historial
+    </a>
+
+</div>
+
+<div class="card shadow-sm">
+
+    <div class="card-body">
+
+        <p>
+            <strong>Evento:</strong><br>
+            {{ movimiento.evento.nombre_evento if movimiento.evento else "Evento eliminado" }}
+        </p>
+
+        <p>
+            <strong>Sala:</strong><br>
+            {% if movimiento.evento and movimiento.evento.sala %}
+                {{ movimiento.evento.sala.nombre }}
+            {% else %}
+                Sin asignar
+            {% endif %}
+        </p>
+
+        <p>
+            <strong>Acción:</strong><br>
+            {% if movimiento.accion|lower == "modificado" %}
+                <span class="badge bg-warning text-dark">{{ movimiento.accion }}</span>
+            {% elif movimiento.accion|lower == "original" %}
+                <span class="badge bg-info text-dark">{{ movimiento.accion }}</span>
+            {% else %}
+                <span class="badge bg-secondary">{{ movimiento.accion }}</span>
+            {% endif %}
+        </p>
+
+        <p>
+            <strong>Fecha y hora:</strong><br>
+            {{ movimiento.fecha_registro.strftime("%d/%m/%Y %H:%M") if movimiento.fecha_registro else "" }}
+        </p>
+
+        <p>
+            <strong>Descripción:</strong><br>
+            {{ movimiento.descripcion }}
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

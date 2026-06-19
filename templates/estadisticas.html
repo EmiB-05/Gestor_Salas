@@ -109,10 +109,10 @@ new Chart(
     {
         type: 'bar',
         data: {
-            labels: ['Sala A', 'Sala B', 'Sala C'],
+            labels: {{ salas_labels|tojson }},
             datasets: [{
                 label: 'Eventos',
-                data: [15, 10, 8]
+                data: {{ salas_data|tojson }}
             }]
         }
     }
@@ -125,9 +125,9 @@ new Chart(
     {
         type: 'pie',
         data: {
-            labels: ['Activo', 'Modificado', 'Cancelado'],
+            labels: {{ estado_labels|tojson }},
             datasets: [{
-                data: [20, 4, 2]
+                data: {{ estado_data|tojson }}
             }]
         }
     }
@@ -140,17 +140,10 @@ new Chart(
     {
         type: 'line',
         data: {
-            labels: [
-                'Ene',
-                'Feb',
-                'Mar',
-                'Abr',
-                'May',
-                'Jun'
-            ],
+            labels: {{ meses_labels|tojson }},
             datasets: [{
                 label: 'Asistentes',
-                data: [120, 180, 150, 220, 250, 300]
+                data: {{ asistentes_data|tojson }}
             }]
         }
     }
