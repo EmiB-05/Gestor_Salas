@@ -1,12 +1,4 @@
 {% extends 'base.html' %}
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% for category, message in messages %}
-    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-      {{ message }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-  {% endfor %}
-{% endwith %}
 {% block content %}
 
 <form method="POST">
@@ -105,7 +97,8 @@
                         class="form-control"
                         min="1"
                         placeholder="Cantidad de asistentes"
-                        value="{{ asistentes if asistentes is defined else '' }}">
+                        value="{{ asistentes if asistentes is defined else '' }}"
+                        required>
 
                 </div>
 
@@ -183,7 +176,8 @@
                         type="date"
                         name="fecha"
                         class="form-control"
-                        value="{{ fecha if fecha is defined else '' }}">
+                        value="{{ fecha if fecha is defined else '' }}"
+                        required>
 
                 </div>
 
@@ -197,7 +191,8 @@
                         type="time"
                         name="hora_inicio"
                         class="form-control"
-                        value="{{ hora_inicio if hora_inicio is defined else '' }}">
+                        value="{{ hora_inicio if hora_inicio is defined else '' }}"
+                        required>
 
                 </div>
 
@@ -211,7 +206,8 @@
                         type="time"
                         name="hora_fin"
                         class="form-control"
-                        value="{{ hora_fin if hora_fin is defined else '' }}">
+                        value="{{ hora_fin if hora_fin is defined else '' }}"
+                        required>
 
                 </div>
 
@@ -223,17 +219,21 @@
 
 </div>
 <div class="col-md-6 mb-3">
-    <label class="form-label">Sala</label>
-    <select name="sala_id" class="form-select" required>
-        <option value="">Selecciona una sala</option>
+    <label class="form-label">Salas (máximo 2)</label>
+    <select name="sala_ids" id="sala_ids" class="form-select" multiple size="3" required>
         {% for sala in salas %}
         <option
             value="{{ sala.id }}"
-            {% if sala_id is defined and sala_id == sala.id %}selected{% endif %}>
+            data-capacidad="{{ sala.capacidad }}"
+            {% if sala_ids is defined and sala.id in sala_ids %}selected{% endif %}>
             {{ sala.nombre }} (cap. {{ sala.capacidad }})
         </option>
         {% endfor %}
     </select>
+    <div class="form-text">
+        Para más de 40 asistentes, selecciona dos salas. Capacidad seleccionada:
+        <strong id="capacidad-seleccionada">0</strong>.
+    </div>
 </div>
 
 <!-- Columna derecha -->
@@ -347,5 +347,22 @@
 </div>
 
 </form>
+
+<script>
+const selectorSalas = document.getElementById('sala_ids');
+const capacidadSeleccionada = document.getElementById('capacidad-seleccionada');
+
+function actualizarCapacidad() {
+    const opciones = [...selectorSalas.selectedOptions];
+    if (opciones.length > 2) {
+        opciones[opciones.length - 1].selected = false;
+    }
+    capacidadSeleccionada.textContent = [...selectorSalas.selectedOptions]
+        .reduce((total, opcion) => total + Number(opcion.dataset.capacidad), 0);
+}
+
+selectorSalas.addEventListener('change', actualizarCapacidad);
+actualizarCapacidad();
+</script>
 
 {% endblock %}

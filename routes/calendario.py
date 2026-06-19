@@ -15,6 +15,9 @@ def calendario():
 
     for evento in eventos_db:
 
+        # Los registros antiguos sólo tienen sala_id; los nuevos pueden ocupar dos.
+        nombres_salas = [sala.nombre for sala in evento.salas_asignadas]
+
         eventos.append({
             "id": evento.id,
             "title": evento.nombre_evento,
@@ -24,7 +27,7 @@ def calendario():
             "asistentes": evento.asistentes,
             "estado": evento.estado,
             "tipo_acomodo": evento.tipo_acomodo,
-            "sala": evento.sala.nombre if evento.sala else "Sin asignar"
+            "sala": ", ".join(nombres_salas) if nombres_salas else "Sin asignar"
         })
 
     return render_template(

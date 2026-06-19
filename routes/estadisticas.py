@@ -19,27 +19,20 @@ def estadisticas():
     total_eventos = Evento.query.count()
     cancelados = Evento.query.filter_by(estado="Cancelado").count()
 
-    # Salas que tienen al menos un evento asociado
-    total_salas = (
-        db.session.query(Evento.sala_id)
-        .filter(Evento.sala_id.isnot(None))
-        .distinct()
-        .count()
-    )
+    salas = Sala.query.order_by(Sala.id).all()
+    eventos = Evento.query.all()
+    conteo_por_sala = {sala.id: 0 for sala in salas}
+    for evento in eventos:
+        for sala in evento.salas_asignadas:
+            conteo_por_sala[sala.id] += 1
+    total_salas = sum(1 for cantidad in conteo_por_sala.values() if cantidad)
 
     promedio = db.session.query(func.avg(Evento.asistentes)).scalar()
     promedio_asistentes = round(promedio) if promedio else 0
 
     # --- Eventos por sala ---
-    eventos_por_sala = (
-        db.session.query(Sala.nombre, func.count(Evento.id))
-        .outerjoin(Evento, Evento.sala_id == Sala.id)
-        .group_by(Sala.id, Sala.nombre)
-        .order_by(Sala.id)
-        .all()
-    )
-    salas_labels = [nombre for nombre, _ in eventos_por_sala]
-    salas_data = [cantidad for _, cantidad in eventos_por_sala]
+    salas_labels = [sala.nombre for sala in salas]
+    salas_data = [conteo_por_sala[sala.id] for sala in salas]
 
     # --- Estado de eventos ---
     estados = ["Activo", "Modificado", "Cancelado"]

@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from database.db import db
 from modelos.evento import Evento
 from modelos.historial import Historial
 
@@ -31,8 +32,8 @@ def historial():
                 if mov.fecha_registro else ""
             ),
             "sala": (
-                evento.sala.nombre
-                if evento and evento.sala else "Sin asignar"
+                ", ".join(sala.nombre for sala in evento.salas_asignadas)
+                if evento and evento.salas_asignadas else "Sin asignar"
             ),
             "evento": evento.nombre_evento if evento else "Evento eliminado",
             "estado": mov.accion,
@@ -58,5 +59,5 @@ def historial():
 
 @historial_bp.route("/historial/<int:id>")
 def detalle(id):
-    mov = Historial.query.get_or_404(id)
+    mov = db.get_or_404(Historial, id)
     return render_template("historial_detalle.html", movimiento=mov)

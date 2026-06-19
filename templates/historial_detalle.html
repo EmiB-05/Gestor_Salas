@@ -28,8 +28,8 @@
 
         <p>
             <strong>Sala:</strong><br>
-            {% if movimiento.evento and movimiento.evento.sala %}
-                {{ movimiento.evento.sala.nombre }}
+            {% if movimiento.evento and movimiento.evento.salas_asignadas %}
+                {{ movimiento.evento.salas_asignadas|map(attribute='nombre')|join(', ') }}
             {% else %}
                 Sin asignar
             {% endif %}

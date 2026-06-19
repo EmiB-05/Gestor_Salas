@@ -1,7 +1,5 @@
-CREATE DATABASE gestor_salas;
-
 CREATE TABLE salas (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nombre VARCHAR(50),
     capacidad INT
 );
@@ -13,7 +11,7 @@ VALUES
 ('Sala C',40);
 
 CREATE TABLE eventos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     responsable VARCHAR(100),
     nombre_evento VARCHAR(150),
     asistentes INT,
@@ -34,11 +32,11 @@ CREATE TABLE eventos (
 );
 
 CREATE TABLE historial (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     evento_id INT,
     accion VARCHAR(20),
     descripcion VARCHAR(255),
-    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY(evento_id) REFERENCES eventos(id)
 );
@@ -57,7 +55,7 @@ CREATE TABLE evento_salas (
 );
 
 CREATE TABLE servicios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nombre VARCHAR(100)
 );
 

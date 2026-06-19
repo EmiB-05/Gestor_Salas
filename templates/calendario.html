@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 <p>
                     <strong>Fin:</strong><br>
-                    ${e.end.toLocaleString()}
+                    ${e.end ? e.end.toLocaleString() : "Sin hora de fin"}
                 </p>
 
                 <div class="d-grid gap-2">
