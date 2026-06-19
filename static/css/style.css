@@ -30,3 +30,72 @@ body{
 .fc {
     width: 100%;
 }
+
+/* ---------- Calendario ---------- */
+
+/* Botones de la barra de herramientas al estilo Bootstrap */
+.fc .fc-button-primary{
+    background-color:#0d6efd;
+    border-color:#0d6efd;
+    text-transform:capitalize;
+    font-weight:500;
+    box-shadow:none;
+}
+
+.fc .fc-button-primary:hover{
+    background-color:#0b5ed7;
+    border-color:#0a58ca;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active{
+    background-color:#0a58ca;
+    border-color:#0a53be;
+}
+
+.fc .fc-toolbar-title{
+    font-size:1.25rem;
+    font-weight:600;
+    text-transform:capitalize;
+}
+
+/* Eventos: redondeados, con espacio interior y leve elevación al pasar el ratón */
+.fc-timegrid-event{
+    border-radius:6px;
+    padding:2px 4px;
+    box-shadow:0 1px 2px rgba(0,0,0,.15);
+    transition:transform .08s ease, box-shadow .08s ease;
+}
+
+.fc-timegrid-event:hover{
+    transform:translateY(-1px);
+    box-shadow:0 3px 6px rgba(0,0,0,.25);
+    cursor:pointer;
+}
+
+/* Resalta suavemente la columna del día actual */
+.fc .fc-day-today{
+    background:#eef4ff !important;
+}
+
+/* Leyenda de colores */
+.calendar-legend{
+    display:flex;
+    gap:1rem;
+    flex-wrap:wrap;
+    align-items:center;
+    font-size:.85rem;
+    color:#495057;
+}
+
+.calendar-legend .legend-item{
+    display:inline-flex;
+    align-items:center;
+    gap:.35rem;
+}
+
+.calendar-legend .legend-dot{
+    width:12px;
+    height:12px;
+    border-radius:3px;
+    display:inline-block;
+}
