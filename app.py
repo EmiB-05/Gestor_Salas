@@ -9,6 +9,7 @@ from routes.historial import historial_bp
 from modelos.evento import Evento
 from modelos.sala import Sala
 from modelos.historial import Historial
+from routes.reporte import reporte_bp
 
 app = Flask(__name__)
 
@@ -18,6 +19,7 @@ app.register_blueprint(calendar_bp)
 app.register_blueprint(eventos_bp)
 app.register_blueprint(estadisticas_bp)
 app.register_blueprint(historial_bp)
+app.register_blueprint(reporte_bp)
 
 db.init_app(app)
 
