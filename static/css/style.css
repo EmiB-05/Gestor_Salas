@@ -30,3 +30,35 @@ body{
 .fc {
     width: 100%;
 }
+
+.evento-card {
+    width: 100%;
+    overflow: hidden;
+}
+
+.evento-titulo {
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.evento-sala,
+.evento-asistentes {
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tabla-historial {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.tabla-historial thead th {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+}

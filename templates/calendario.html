@@ -62,7 +62,7 @@
 <div class="row">
 
     <!-- Calendario -->
-    <div class="col-lg-8">
+    <div class="col-lg-9">
 
         <div class="card shadow-sm">
             <div class="card-body">
@@ -73,7 +73,7 @@
     </div>
 
     <!-- Panel lateral -->
-    <div class="col-lg-4">
+    <div class="col-lg-3">
 
         <div class="card shadow-sm">
 
@@ -155,6 +155,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         locale: 'es',
 
+        buttonText: {
+            today: 'Hoy',
+            timeGridWeek: 'Semana',
+            timeGridDay: 'Día'
+        },
+
         initialView: 'timeGridWeek',
 
         allDaySlot: false,
@@ -179,22 +185,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
         eventContent: function(arg) {
 
+            const inicio = arg.event.start;
+            const fin = arg.event.end;
+
+            const duracionMinutos = (fin - inicio) / (1000 * 60);
+
             return {
-
                 html: `
-                    <div>
+                    <div class="evento-card">
 
-                        <div style="font-weight:bold;">
+                        <div class="evento-titulo">
                             ${arg.event.title}
                         </div>
 
-                        <div style="font-size:11px;">
-                            📍 ${arg.event.extendedProps.sala}
-                        </div>
+                        ${duracionMinutos > 60 ? `
+                            <div class="evento-sala">
+                                📍 ${arg.event.extendedProps.sala}
+                            </div>
 
-                        <div style="font-size:10px;">
-                            👥 ${arg.event.extendedProps.asistentes}
-                        </div>
+                            <div class="evento-asistentes">
+                                👥 ${arg.event.extendedProps.asistentes}
+                            </div>
+                        ` : ''}
 
                     </div>
                 `
@@ -228,6 +240,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
 
             `;
+        },
+
+        // Mostrar nombre completo de evento cuando hover sobre el evento
+        eventDidMount: function(info) {
+            info.el.title = info.event.title;
         },
 
         // Click en evento

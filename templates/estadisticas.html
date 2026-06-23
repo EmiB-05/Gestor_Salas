@@ -4,6 +4,56 @@
 
 <h2 class="mb-4">Estadísticas</h2>
 
+<form method="GET" class="row mb-4">
+
+    <div class="col-md-3">
+
+        <select name="mes" class="form-select">
+
+            <option value="">Todos los meses</option>
+
+            <option value="1" {% if mes_actual == 1 %}selected{% endif %}>Enero</option>
+            <option value="2" {% if mes_actual == 2 %}selected{% endif %}>Febrero</option>
+            <option value="3" {% if mes_actual == 3 %}selected{% endif %}>Marzo</option>
+            <option value="4" {% if mes_actual == 4 %}selected{% endif %}>Abril</option>
+            <option value="5" {% if mes_actual == 5 %}selected{% endif %}>Mayo</option>
+            <option value="6" {% if mes_actual == 6 %}selected{% endif %}>Junio</option>
+            <option value="7" {% if mes_actual == 7 %}selected{% endif %}>Julio</option>
+            <option value="8" {% if mes_actual == 8 %}selected{% endif %}>Agosto</option>
+            <option value="9" {% if mes_actual == 9 %}selected{% endif %}>Septiembre</option>
+            <option value="10" {% if mes_actual == 10 %}selected{% endif %}>Octubre</option>
+            <option value="11" {% if mes_actual == 11 %}selected{% endif %}>Noviembre</option>
+            <option value="12" {% if mes_actual == 12 %}selected{% endif %}>Diciembre</option>
+
+        </select>
+
+    </div>
+
+    <div class="col-md-2">
+
+        <select name="anio" class="form-select">
+
+            {% for a in range(2026,2031) %}
+            <option value="{{ a }}"
+                {% if anio_actual == a %}selected{% endif %}>
+                {{ a }}
+            </option>
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <div class="col-md-2">
+
+        <button class="btn btn-primary">
+            Filtrar
+        </button>
+
+    </div>
+
+</form>
+
 <div class="row mb-4">
 
     <div class="col-md-3">
@@ -18,8 +68,8 @@
     <div class="col-md-3">
         <div class="card shadow-sm">
             <div class="card-body text-center">
-                <h6>Salas Utilizadas</h6>
-                <h2>{{ total_salas }}</h2>
+            <h6>Asistentes Totales</h6>
+            <h2>{{ asistentes_totales }}</h2>
             </div>
         </div>
     </div>
@@ -83,7 +133,7 @@
         <div class="card shadow-sm">
 
             <div class="card-header">
-                Asistentes por Mes
+                {{ titulo_asistentes }}
             </div>
 
             <div class="card-body">
@@ -140,7 +190,7 @@ new Chart(
     {
         type: 'line',
         data: {
-            labels: {{ meses_labels|tojson }},
+            labels: {{ asistentes_labels|tojson }},
             datasets: [{
                 label: 'Asistentes',
                 data: {{ asistentes_data|tojson }}

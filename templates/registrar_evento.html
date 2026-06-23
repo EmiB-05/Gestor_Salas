@@ -217,26 +217,31 @@
 
     </div>
 
-</div>
-<div class="col-md-6 mb-3">
-    <label class="form-label">Salas (máximo 2)</label>
-    <select name="sala_ids" id="sala_ids" class="form-select" multiple size="3" required>
-        {% for sala in salas %}
-        <option
-            value="{{ sala.id }}"
-            data-capacidad="{{ sala.capacidad }}"
-            {% if sala_ids is defined and sala.id in sala_ids %}selected{% endif %}>
-            {{ sala.nombre }} (cap. {{ sala.capacidad }})
-        </option>
-        {% endfor %}
-    </select>
-    <div class="form-text">
-        Para más de 40 asistentes, selecciona dos salas. Capacidad seleccionada:
-        <strong id="capacidad-seleccionada">0</strong>.
+    <!-- Salas -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header">
+            Salas(máximo 2)
+        </div>
+        
+        <select name="sala_ids" id="sala_ids" class="form-select" multiple size="3" required>
+            {% for sala in salas %}
+            <option
+                value="{{ sala.id }}"
+                data-capacidad="{{ sala.capacidad }}"
+                {% if sala_ids is defined and sala.id in sala_ids %}selected{% endif %}>
+                {{ sala.nombre }} (cap. {{ sala.capacidad }})
+            </option>
+            {% endfor %}
+        </select>
+        <div class="form-text">
+            Para más de 40 asistentes, selecciona dos salas. Capacidad seleccionada:
+            <strong id="capacidad-seleccionada">0</strong>.
+        </div>
     </div>
+
 </div>
 
-<!-- Columna derecha -->
+
 
 <div class="col-lg-4">
 
@@ -317,6 +322,10 @@
         </div>
 
     </div>
+
+
+
+<!-- Columna derecha -->
 
     <!-- Política -->
 

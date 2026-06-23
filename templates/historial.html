@@ -20,23 +20,69 @@
 
 <div class="d-flex gap-2">
 
-    <button class="btn btn-outline-secondary">
-        Exportar CSV
-    </button>
-
     <button class="btn btn-primary">
-        Imprimir Reporte
+        Exportar Historial
     </button>
 
 </div>
 
 </div>
+
+<form method="GET" class="row mb-3">
+
+    <div class="col-md-3">
+
+        <select name="mes" class="form-select">
+
+            <option value="">Todos los meses</option>
+
+            <option value="1"  {% if mes_actual == 1 %}selected{% endif %}>Enero</option>
+            <option value="2"  {% if mes_actual == 2 %}selected{% endif %}>Febrero</option>
+            <option value="3"  {% if mes_actual == 3 %}selected{% endif %}>Marzo</option>
+            <option value="4"  {% if mes_actual == 4 %}selected{% endif %}>Abril</option>
+            <option value="5"  {% if mes_actual == 5 %}selected{% endif %}>Mayo</option>
+            <option value="6"  {% if mes_actual == 6 %}selected{% endif %}>Junio</option>
+            <option value="7"  {% if mes_actual == 7 %}selected{% endif %}>Julio</option>
+            <option value="8"  {% if mes_actual == 8 %}selected{% endif %}>Agosto</option>
+            <option value="9"  {% if mes_actual == 9 %}selected{% endif %}>Septiembre</option>
+            <option value="10" {% if mes_actual == 10 %}selected{% endif %}>Octubre</option>
+            <option value="11" {% if mes_actual == 11 %}selected{% endif %}>Noviembre</option>
+            <option value="12" {% if mes_actual == 12 %}selected{% endif %}>Diciembre</option>
+
+        </select>
+
+    </div>
+
+    <div class="col-md-2">
+
+        <select name="anio" class="form-select">
+
+            {% for a in range(2026,2031) %}
+            <option value="{{ a }}"
+                {% if anio_actual == a %}selected{% endif %}>
+                {{ a }}
+            </option>
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <div class="col-md-2">
+
+        <button class="btn btn-primary">
+            Filtrar
+        </button>
+
+    </div>
+
+</form>
 
 <!-- Tabla -->
 
 <div class="card shadow-sm mb-4">
 
-<div class="card-body p-0">
+<div class="card-body p-0 tabla-historial">
 
     <table class="table table-hover mb-0">
 
